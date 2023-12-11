@@ -1,6 +1,6 @@
 function exportToJSON() {
   // ID van het Google Docs-document
-  var documentId = 'JOUW_GOOGLE_DOCS_DOCUMENT_ID';
+  var documentId = '1_BDbajX5QUKUMJFAqK-8Xb8HpGywAyHrPXyQbCH4-uM';
   
   // Document ophalen
   var document = DocumentApp.openById(documentId);
