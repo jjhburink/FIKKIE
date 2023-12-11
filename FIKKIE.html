@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIKKIE Platform</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Gellix', sans-serif;
+      background-color: #F5F5F5; /* Lichte achtergrondkleur */
+    }
+
+    header {
+      background-color: #FFFFFF; /* Witte achtergrond in de header */
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtiele schaduw aan de onderkant */
+    }
+
+    header a {
+      transition: transform 0.2s ease-in-out;
+    }
+
+    header a:hover {
+      transform: scale(1.05);
+    }
+
+    .content {
+      background-color: #F5F5F5; /* Lichte achtergrondkleur in de content */
+      border-radius: 8px; /* Subtiele afgeronde hoeken */
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Subtiele schaduw */
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="py-4 flex justify-between items-center">
+    <div class="ml-8">
+      <img src="LOGO_URL" alt="FIKKIE Logo" class="w-24 h-auto">
+    </div>
+    <nav class="flex space-x-8 mr-8">
+      <!-- Dynamisch genereren van pagina's -->
+      <!-- Voorbeeld: <a href="#" data-page="pagina1">Pagina 1</a> -->
+    </nav>
+    <a href="mailto:info@fikkie.com" class="mr-8 text-blue-500">Hulp nodig?</a>
+  </header>
+
+  <div class="container mx-auto my-8 px-4 content">
+    <h1 class="text-3xl font-bold mt-4 mb-8">Paginatitel</h1>
+    <div id="page-content"></div>
+  </div>
+
+  <script>
+    // Vervang deze URL door de werkelijke URL van je JSON-bestand
+    const jsonUrl = 'URL_VAN_JSON_BESTAND';
+
+    // Functie voor het laden van JSON-bestand en tonen van pagina-inhoud
+    async function loadPage(pageName) {
+      const response = await fetch(jsonUrl);
+      const data = await response.json();
+
+      const page = data.pages.find(p => p.title.toLowerCase() === pageName.toLowerCase());
+
+      if (page) {
+        document.getElementById('page-content').innerHTML = '';
+        page.sections.forEach(section => {
+          const element = document.createElement(section.type === 'form' ? 'form' : 'p');
+          element.textContent = section.content;
+          document.getElementById('page-content').appendChild(element);
+        });
+      } else {
+        document.getElementById('page-content').innerHTML = '<p>Pagina niet gevonden</p>';
+      }
+    }
+
+    // Dynamisch genereren van pagina-links in de header
+    document.addEventListener('DOMContentLoaded', async function () {
+      const response = await fetch(jsonUrl);
+      const data = await response.json();
+
+      const nav = document.querySelector('header nav');
+      data.pages.forEach(page => {
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = page.title;
+        link.dataset.page = page.title.toLowerCase();
+        link.addEventListener('click', () => loadPage(link.dataset.page));
+        nav.appendChild(link);
+      });
+
+      // Standaardpagina laden
+      loadPage(data.pages[0].title.toLowerCase());
+    });
+  </script>
+
+</body>
+
+</html>
