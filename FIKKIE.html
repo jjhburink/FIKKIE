@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIKKIE</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gellix&family=Poppins:wght@400;600&display=swap');
+
+        body { font-family: 'Gellix', 'Poppins', sans-serif; }
+        .bg-amber { background-color: #FF3E31; }
+        .bg-onyx { background-color: #0F1540; }
+        .bg-quartz { background-color: #DAEAFF; }
+        .bg-jasper { background-color: #E13FF8; }
+        .hover\:scale-110:hover { transform: scale(1.10); }
+        .text-onyx { color: #0F1540; }
+        .text-amber { color: #FF3E31; }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <header class="w-full bg-onyx text-white p-4 shadow-md flex justify-between items-center">
+        <span>FIKKIE</span>
+        <a href="mailto:hello@fikkie.com?subject=HELP!&body=Naam:%0D%0AHulpvraag:%0D%0AOp dit nummer kun je mij bereiken:%0D%0AOverige opmerkingen:" class="bg-jasper hover:scale-110 transition-transform p-2 rounded">hulp nodig?</a>
+    </header>
+
+    <nav id="dynamicNav" class="container mx-auto p-4 text-lg"><!-- Dynamische navigatie --></nav>
+
+    <main id="mainContent" class="bg-quartz rounded-lg shadow p-8 container mx-auto my-4">
+        <!-- Dynamische pagina inhoud -->
+    </main>
+
+    <script>
+        const jsonData = [
+  {
+    "title": "Home",
+    "content": [
+      {
+        "type": "heading1",
+        "text": "Een tikkie. Maar dan voor lenen."
+      },
+      {
+        "type": "normal",
+        "text": "Je herkent het vast: je hebt een kind, vriend of ander goede bekende die om goede redenen geld van jou wil lenen. Jij kunt dat missen en wilt hem of haar graag helpen. Maar tegelijkertijd wil je dat dit dan goed geregeld is en zonder gedoe, het geld op tijd wordt terugbetaald. Andersom: misschien sta jij voor een grote uitgave waarvoor je geld van een vriend of familie zou willen lenen. Hoe fijn zou het zijn als je dat dan ook gewoon goed kunt regelen? Als uitlenende partij wil je de zekerheid dat de maandelijkse termijnen dan ook netjes volgens afspraak weer terugbetaald worden; als lenende partij wil je niet het gedoe dat je iedere maand een bedrag moet worden overgemaakt. Beide partijen willen dat er geen foutjes in de kosten/opbrengsten worden gemaakt."
+      },
+      {
+        "type": "normal",
+        "text": "Goed nieuws! Dat regelen wij allemaal voor je!"
+      },
+      {
+        "type": "heading1",
+        "text": "Hoe het werkt."
+      },
+      {
+        "type": "normal",
+        "text": "Als verstrekker van de lening registreer jij jezelf eerst, en vervolgens kun jij aangeven onder welke voorwaarden jij het geld wilt uitlenen. Je vult enkele gegevens in, zoals de ingangsdatum, de looptijd (of einddatum) en de vergoeding (rente) die jij over de lening wenst te ontvangen. Daarnaast kun je nog extra voorwaarden toevoegen, bijvoorbeeld of er bepaalde zekerheden worden ingebouwd, zoals een borgstelling of een verpanding. Verder bepaal je samen of er vervroegd of extra afgelost mag worden, en of hier dan ook een additionele vergoeding voor in rekening moet (mag) worden gebracht. Je loopt in dit geval namelijk rente-inkomsten mis. Geen zorgen: we nemen je hier stap voor stap in mee."
+      },
+      {
+        "type": "normal",
+        "text": "Het kan ook andersom: als jij de lenende partij bent, kun jij ook de lening voorbereiden. Je geeft dan de voorwaarden waaronder jij het geld wilt lenen op, en je nodigt de partij die jij bereid hebt gevonden om jouw een financiering te verstrekken digitaal uit. De rest wijst zich vanzelf!"
+      },
+      {
+        "type": "normal",
+        "text": "Op basis van de voorwaarden zoals door jullie samen overeengekomen wordt een overeenkomst gegenereerd. Zodra jullie beiden digitaal hebben ondertekend, gaat alles vanzelf!"
+      }
+    ]
+  },
+  {
+    "title": "Registreren",
+    "content": [
+      {
+        "type": "heading1",
+        "text": "Verstrekker"
+      },
+      {
+        "type": "normal",
+        "text": "klik op deze tegel als jij je wilt registreren als verstrekker van de lening. Je nodigt later de geldlener uit."
+      },
+      {
+        "type": "heading1",
+        "text": "Leningnemer"
+      },
+      {
+        "type": "normal",
+        "text": "klik op deze tegel als jij je wilt registreren als geldlener. Je nodigt later de verstrekker van de lening uit."
+      }
+    ]
+  },
+  {
+    "title": "Voorbeeldberekening",
+    "content": [
+      {
+        "type": "normal",
+        "text": "Vul hieronder de gegevens in om een voorbeeld berekening te maken."
+      },
+      {
+        "type": "normal",
+        "text": "Leenbedrag: {float, monetary}"
+      },
+      {
+        "type": "normal",
+        "text": "Ingangsdatum: {date}"
+      },
+      {
+        "type": "normal",
+        "text": "Looptijd (maanden): {date, datepicker}"
+      },
+      {
+        "type": "normal",
+        "text": "Rente (op jaarbasis): {float, percentage}x§"
+      },
+      {
+        "type": "normal",
+        "text": "Maandelijkse termijn*: {calculation, annuity}"
+      },
+      {
+        "type": "normal",
+        "text": "*De lening wordt op basis van annuïteiten verstrekt. Dat betekent dat het maandbedrag altijd gelijk is, en bestaat uit rente en aflossing. Aan het begin van de looptijd wordt er minder afgelost en meer rente betaald. Naarmate de tijd verstrijkt, betaal je steeds minder rente. Dat is logisch, want de lening wordt steeds lager. De aflossing wordt daarmee steeds hoger."
+      }
+    ]
+  }
+];
+
+        function buildNavigation(pages) {
+            const nav = document.getElementById('dynamicNav');
+            pages.forEach((page, index) => {
+                const link = document.createElement('a');
+                link.textContent = page.title;
+                link.href = `#${index}`;
+                link.className = 'mr-4 text-onyx hover:text-amber';
+                link.onclick = (event) => {
+                    event.preventDefault();
+                    displayPageContent(page.content);
+                };
+                nav.appendChild(link);
+            });
+        }
+
+        function displayPageContent(content) {
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = ''; // Clear current content
+            content.forEach(item => {
+                const element = document.createElement(item.type === 'heading1' ? 'h1' : (item.type === 'heading2' ? 'h2' : 'p'));
+                element.textContent = item.text;
+                mainContent.appendChild(element);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            buildNavigation(jsonData);
+            if (jsonData.length > 0) {
+                displayPageContent(jsonData[0].content);
+            }
+        });
+    </script>
+</body>
+</html>
